@@ -151,6 +151,11 @@
   // Año
   document.getElementById('y').textContent = new Date().getFullYear();
 
+   // ENLACE AL REGLAMENTO (pon aquí tu URL pública – PDF, Drive, web)
+  const reglamentoURL = "https://drive.google.com/file/d/18exjFFYQGUNF6L_-oBcT_KMs27if8KOc/view?usp=sharing"; // <— REEMPLAZA ESTO
+  document.getElementById('reglamentoLink').href = reglamentoURL;
+  document.getElementById('btnReglamento').onclick = () => window.open(reglamentoURL, '_blank');
+
   // Lógica del visor
   const viewer = document.getElementById('viewer');
   const viewerTitle = document.getElementById('viewerTitle');

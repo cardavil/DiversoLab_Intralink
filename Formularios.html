@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DiversoLAB – InTralink · Formularios</title>
+<style>
+  :root{
+    --bg-base:#ffffff;
+    --bg-a:#fdda64;
+    --bg-b:#cad2e9;
+    --text:#3f2b56;
+    --card:#ffffffee;
+    --line:#e3e6ef;
+    --btn:#fdda64;
+    --btn-text:#3f2b56;
+    --btn-hover:#cad2e9;
+    --radius:14px;
+  }
+  body{
+    margin:0; color:var(--text); font:16px/1.5 system-ui, -apple-system, Segoe UI, Roboto;
+    background:var(--bg-base);
+    background-image: linear-gradient(180deg, var(--bg-a) 0%, var(--bg-b) 100%);
+    background-attachment: fixed;
+  }
+  .wrap{ max-width:1200px; margin:24px auto; padding:0 16px; }
+  .header{
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:12px 16px;
+  }
+  .brand{display:flex; align-items:center; gap:12px}
+  /* Si tu logo está en Google Drive, usa: https://drive.google.com/uc?export=view&id=ID */
+  .brand img{ width:40px; height:40px; object-fit:contain; border-radius:8px }
+  .brand h1{ font-size:18px; margin:0 }
+  .top-buttons{ display:flex; gap:10px; }
+  .top-buttons .open{
+    background:var(--btn); color:var(--btn-text); border:none; border-radius:10px;
+    padding:8px 12px; cursor:pointer; transition:background .2s ease; text-decoration:none;
+  }
+  .top-buttons .open:hover{ background:var(--btn-hover) }
+  .top-buttons .open.active{ outline:2px solid color-mix(in srgb, var(--btn) 60%, transparent) }
+  .layout{ display:flex; gap:16px; margin-top:16px; }
+  .side{
+    width:320px; min-width:260px; background:var(--card); border:1px solid var(--line);
+    border-radius:var(--radius); padding:12px; height:calc(100vh - 180px); overflow:auto;
+  }
+  .main{
+    flex:1; min-width:0; background:var(--card); border:1px solid var(--line);
+    border-radius:var(--radius); display:flex; flex-direction:column;
+  }
+  .group{ margin-bottom:16px; }
+  .group h3{
+    margin:8px 8px 6px; font-size:14px; letter-spacing:.2px; opacity:.9;
+    border-left:4px solid var(--btn); padding-left:8px;
+  }
+  .list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px }
+  .item-btn{
+    width:100%; text-align:left; border:1px solid var(--line); background:white;
+    border-radius:12px; padding:10px 12px; cursor:pointer; color:var(--text);
+  }
+  .item-btn:hover{ border-color:#d1d6ea; background:#fafbff }
+  .item-btn.active{ outline:2px solid color-mix(in srgb, var(--btn) 50%, transparent) }
+  .viewer-head{
+    display:flex; align-items:center; justify-content:space-between; gap:8px;
+    padding:10px 12px; border-bottom:1px solid var(--line);
+  }
+  .viewer-title{ margin:0; font-size:15px; }
+  .open-small{
+    background:var(--btn); color:var(--btn-text); border:none; border-radius:10px;
+    padding:8px 12px; cursor:pointer; transition:background .2s ease;
+  }
+  .open-small:hover{ background:var(--btn-hover) }
+  .open-small:disabled{ opacity:.55; cursor:not-allowed }
+  iframe{ flex:1; width:100%; border:0; border-bottom-left-radius:var(--radius); border-bottom-right-radius:var(--radius) }
+  .footer{ text-align:center; margin-top:16px; color:#5b4a6e; }
+  @media (max-width: 900px){
+    .layout{ flex-direction:column }
+    .side{ width:100%; height:auto }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="header">
+      <div class="brand">
+        <img src="https://drive.google.com/uc?export=view&id=1HmOFegB4pdZa2Fh-NLBXWhQn38oIQrr1" alt="DiversoLAB logo">
+        <h1>DiversoLAB – InTralink</h1>
+      </div>
+      <div class="top-buttons">
+        <!-- Esta es la página activa (Formularios) -->
+        <a class="open active" href="./index.html">Formularios</a>
+        <!-- Enlace a la otra página (Visualizaciones) -->
+        <a class="open" href="./viz.html">Visualizaciones</a>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="side">
+        <!-- REGISTROS -->
+        <div class="group">
+          <h3>Registros</h3>
+          <ul class="list">
+            <!-- NOTA: usa siempre enlaces "embed" de Forms (terminan en viewform?embedded=true) -->
+            <li><button class="item-btn" data-title="Registro + Consentimiento" data-url="https://docs.google.com/forms/d/e/1FAIpQLScghuGM34r0ugfefoma48AS3nqsSkVjqFMHqlyaJw91f0Q6AA/viewform?embedded=true">Registro + Consentimiento</button></li>
+          </ul>
+        </div>
+
+        <!-- FORMULARIOS -->
+        <div class="group">
+          <h3>Formularios</h3>
+          <ul class="list">
+            <li><button class="item-btn" data-title="Evaluación Experiencias" data-url="https://docs.google.com/forms/d/e/REEMPLAZA_ID/viewform?embedded=true">Evaluación Experiencias</button></li>
+            <li><button class="item-btn" data-title="Evaluación Cursos" data-url="https://docs.google.com/forms/d/e/REEMPLAZA_ID/viewform?embedded=true">Evaluación Cursos</button></li>
+            <li><button class="item-btn" data-title="QoL INICIO-FEAPS: Autoinforme" data-url="https://docs.google.com/forms/d/e/REEMPLAZA_ID/viewform?embedded=true">QoL INICIO-FEAPS: Autoinforme</button></li>
+            <li><button class="item-btn" data-title="QoL INICIO-FEAPS: Otros" data-url="https://docs.google.com/forms/d/e/REEMPLAZA_ID/viewform?embedded=true">QoL INICIO-FEAPS: Otros</button></li>
+          </ul>
+        </div>
+
+        <!-- CHECKLIST -->
+        <div class="group">
+          <h3>Checklist</h3>
+          <ul class="list">
+            <li><button class="item-btn" data-title="Accesibilidad" data-url="https://docs.google.com/forms/d/e/REEMPLAZA_ID/viewform?embedded=true">Accesibilidad</button></li>
+            <li><button class="item-btn" data-title="Ambiental" data-url="https://docs.google.com/forms/d/e/REEMPLAZA_ID/viewform?embedded=true">Ambiental</button></li>
+          </ul>
+        </div>
+
+        <!-- NOTAS:
+          - Para añadir un NUEVO formulario: duplica una <li> y pega el src de "Enviar -> <> Incrustar HTML".
+          - Si quieres abrir un PDF de Drive dentro del visor, usa el formato:
+                https://drive.google.com/file/d/ID/preview
+            (no uses /view)
+        -->
+      </aside>
+
+      <section class="main">
+        <div class="viewer-head">
+          <h2 class="viewer-title" id="viewerTitle">Selecciona un elemento del menú</h2>
+          <div style="display:flex; gap:8px;">
+            <button class="open-small" id="openNew" disabled>Abrir en pestaña nueva ↗</button>
+          </div>
+        </div>
+        <iframe id="viewer" title="Visor" loading="lazy" referrerpolicy="no-referrer"></iframe>
+      </section>
+    </div>
+
+    <p class="footer">© <span id="y"></span> DiversoLAB</p>
+  </div>
+
+<script>
+  // Año
+  document.getElementById('y').textContent = new Date().getFullYear();
+
+  // Selección de ítems (carga de iframe)
+  const viewer = document.getElementById('viewer');
+  const title  = document.getElementById('viewerTitle');
+  const openNew = document.getElementById('openNew');
+
+  document.addEventListener('click', (e)=>{
+    const btn = e.target.closest('.item-btn');
+    if(!btn) return;
+    document.querySelectorAll('.item-btn.active').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const url = btn.dataset.url || '';
+    title.textContent = btn.dataset.title || 'Elemento';
+    viewer.src = url;
+    openNew.disabled = !url;
+    openNew.onclick = () => url && window.open(url, '_blank');
+  });
+</script>
+</body>
+</html>

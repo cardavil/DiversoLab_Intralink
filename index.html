@@ -2,89 +2,203 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DiversoLAB – InTralink</title>
 <style>
-body {font-family: sans-serif; background:#0f1320; color:white; margin:0;}
-header {background:#1d2438; padding:1rem; text-align:center;}
-nav {display:flex; justify-content:center; gap:1rem; margin-bottom:1rem;}
-button {background:#2d3550; color:white; border:none; padding:0.5rem 1rem; border-radius:8px; cursor:pointer;}
-button.active {background:#46d3c0; color:#000;}
-section {display:none;}
-section.active {display:flex;}
-.sidebar {width:200px; padding:1rem; border-right:1px solid #444;}
-iframe {flex:1; height:80vh; border:0;}
-main {display:flex;}
+  :root{
+    --bg-base:#ffffff;          /* base blanco */
+    --bg-a:#fdda64;             /* pasa a #fdda64 */
+    --bg-b:#cad2e9;             /* y luego a #cad2e9 */
+    --text:#3f2b56;             /* color de letra solicitado */
+    --card:#ffffffee;
+    --line:#e3e6ef;
+    --btn:#fdda64;              /* color botón */
+    --btn-text:#3f2b56;
+    --btn-hover:#cad2e9;        /* hover botón */
+    --radius:14px;
+  }
+
+  /* Fondo claro con transición suave */
+  body{
+    margin:0; color:var(--text); font:16px/1.5 system-ui, -apple-system, Segoe UI, Roboto;
+    background: var(--bg-base);
+    background-image: linear-gradient(180deg, var(--bg-a) 0%, var(--bg-b) 100%);
+    background-attachment: fixed;
+  }
+
+  /* Contenedor */
+  .wrap{ max-width:1200px; margin:24px auto; padding:0 16px; }
+
+  /* Header */
+  .header{
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:12px 16px;
+  }
+  .brand{display:flex; align-items:center; gap:12px}
+  .brand img{ width:40px; height:40px; object-fit:contain; border-radius:8px }
+  .brand h1{ font-size:18px; margin:0 }
+
+  /* Layout */
+  .layout{ display:flex; gap:16px; margin-top:16px; }
+  .side{
+    width:320px; min-width:260px; background:var(--card); border:1px solid var(--line);
+    border-radius:var(--radius); padding:12px; height:calc(100vh - 180px); overflow:auto;
+  }
+  .main{
+    flex:1; min-width:0; background:var(--card); border:1px solid var(--line);
+    border-radius:var(--radius); display:flex; flex-direction:column;
+  }
+
+  /* Secciones del menú */
+  .group{ margin-bottom:16px; }
+  .group h3{
+    margin:8px 8px 6px; font-size:14px; letter-spacing:.2px; opacity:.9;
+    border-left:4px solid var(--btn); padding-left:8px;
+  }
+  .list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px }
+  .item-btn{
+    width:100%; text-align:left; border:1px solid var(--line); background:white;
+    border-radius:12px; padding:10px 12px; cursor:pointer; color:var(--text);
+  }
+  .item-btn:hover{ border-color:#d1d6ea; background:#fafbff }
+  .item-btn.active{ outline:2px solid color-mix(in srgb, var(--btn) 50%, transparent) }
+
+  /* Viewer */
+  .viewer-head{
+    display:flex; align-items:center; justify-content:space-between; gap:8px;
+    padding:10px 12px; border-bottom:1px solid var(--line);
+  }
+  .viewer-title{ margin:0; font-size:15px; }
+  .open{
+    background:var(--btn); color:var(--btn-text); border:none; border-radius:10px;
+    padding:8px 12px; cursor:pointer;
+  }
+  .open:hover{ background:var(--btn-hover) }
+  iframe{ flex:1; width:100%; border:0; border-bottom-left-radius:var(--radius); border-bottom-right-radius:var(--radius) }
+
+  /* Footer */
+  .footer{ text-align:center; margin-top:16px; color:#5b4a6e; }
+  .footer a{ color:inherit; text-decoration:underline }
+
+  @media (max-width: 900px){
+    .layout{ flex-direction:column }
+    .side{ width:100%; height:auto }
+  }
 </style>
 </head>
 <body>
+  <div class="wrap">
+    <!-- Encabezado con logo .gif -->
+    <header class="header">
+      <div class="brand">
+        <!-- REEMPLAZA URL_DEL_LOGO.gif por el enlace a tu logo -->
+        <img src="URL_DEL_LOGO.gif" alt="DiversoLAB logo">
+        <h1>DiversoLAB – InTralink</h1>
+      </div>
+      <button class="open" id="btnReglamento">Reglamento de Protección de Datos</button>
+    </header>
 
-<header>
-  <h1>DiversoLAB – InTralink</h1>
-  <nav>
-    <button id="btnForms" class="active">Forms</button>
-    <button id="btnViz">Visualizaciones</button>
-  </nav>
-</header>
+    <div class="layout">
+      <!-- Sidebar -->
+      <aside class="side">
+        <!-- REGISTROS -->
+        <div class="group">
+          <h3>Registros</h3>
+          <ul class="list" id="registros">
+            <!-- Reemplaza URL_AQUI con el enlace embed de Google Forms -->
+            <li><button class="item-btn" data-title="Registro + Consentimiento" data-url="URL_AQUI">Registro + Consentimiento</button></li>
+            <li><a href="#" onclick="load('https://docs.google.com/forms/d/e/1FAIpQLScghuGM34r0ugfefoma48AS3nqsSkVjqFMHqlyaJw91f0Q6AA/viewform?embedded=true')">Registro + Consentimiento</a></li>
+          </ul>
+        </div>
 
-<main>
-  <!-- Registros -->
-  <section id="forms" class="active">
-    <div class="sidebar">
-      <h3>Registros</h3>
-      <ul>
-        <li><a href="#" onclick="load('https://docs.google.com/forms/d/e/1FAIpQLScghuGM34r0ugfefoma48AS3nqsSkVjqFMHqlyaJw91f0Q6AA/viewform?embedded=true')">Registro + Consentimiento</a></li>     
-        <li><a href="#" onclick="load('https://docs.google.com/forms/d/e/1FAIpQLSeWPzaZ4zf9bzT3rk11QpDJeiBjiXhkXH57McvPQOUaAeaEHg/viewform?embedded=true')">Checklist Accesibilidad</a></li>         
-        <li><a href="#" onclick="load('https://docs.google.com/forms/d/e/1FAIpQLSfZqMsVi8GzXp8bvhWIuJ7_l665RBCi1NB3bDWgShAAV9iTzg/viewform?embedded=true')">Checklist Ambiental</a></li>         
-        <li><a href="#" onclick="load('https://docs.google.com/forms/d/e/1FAIpQLScghuGM34r0ugfefoma48AS3nqsSkVjqFMHqlyaJw91f0Q6AA/viewform?embedded=true')">Registro + Consentimiento</a></li>     
-        <li><a href="#" onclick="load('https://docs.google.com/forms/d/e/1FAIpQLSdWCZgfYQHg5M6T9AeCP_pjDdevG9qIKgtj5UWRJlO56LhuDg/viewform?embedded=true')">Evaluación Experiencias</a></li>     
-        <li><a href="#" onclick="load('https://docs.google.com/forms/d/e/1FAIpQLSddsNTnnqedoSuIdl8HxN0FrI5S8y8JnL4vihNCngERJpEqMw/viewform?embedded=true')">Evaluación Cursos</a></li>        
-        <li><a href="#" onclick="load('https://docs.google.com/forms/d/e/1FAIpQLSex5W3Bz3YOnfuAGhPiLPiJjd2UW_v_xxdBLbjjxX1r4AcL2Q/viewform?embedded=true')">QoL INICO-FEAPS: Autoinforme</a></li>         
-        <li><a href="#" onclick="load('https://docs.google.com/forms/d/e/1FAIpQLSdEuJy4lO1rxs7JdRAooFnVtgrM6Xcb8PCM9b_SUmszVbMKnA/viewform?embedded=true')">QoL INICO-FEAPS: Otros</a></li>                
-      </ul>
+        <!-- FORMULARIOS -->
+        <div class="group">
+          <h3>Formularios</h3>
+          <ul class="list" id="formularios">
+            <li><button class="item-btn" data-title="Evaluación Experiencias" data-url="URL_AQUI">Evaluación Experiencias</button></li>
+            <li><button class="item-btn" data-title="Evaluación Cursos" data-url="URL_AQUI">Evaluación Cursos</button></li>
+            <li><button class="item-btn" data-title="QoL INICIO-FEAPS: Autoinforme" data-url="URL_AQUI">QoL INICIO-FEAPS: Autoinforme</button></li>
+            <li><button class="item-btn" data-title="QoL INICIO-FEAPS: Otros" data-url="URL_AQUI">QoL INICIO-FEAPS: Otros</button></li>
+            <li><a href="#" onclick="load('https://docs.google.com/forms/d/e/1FAIpQLSdWCZgfYQHg5M6T9AeCP_pjDdevG9qIKgtj5UWRJlO56LhuDg/viewform?embedded=true')">Evaluación Experiencias</a></li>     
+            <li><a href="#" onclick="load('https://docs.google.com/forms/d/e/1FAIpQLSddsNTnnqedoSuIdl8HxN0FrI5S8y8JnL4vihNCngERJpEqMw/viewform?embedded=true')">Evaluación Cursos</a></li>        
+            <li><a href="#" onclick="load('https://docs.google.com/forms/d/e/1FAIpQLSex5W3Bz3YOnfuAGhPiLPiJjd2UW_v_xxdBLbjjxX1r4AcL2Q/viewform?embedded=true')">QoL INICO-FEAPS: Autoinforme</a></li>         
+            <li><a href="#" onclick="load('https://docs.google.com/forms/d/e/1FAIpQLSdEuJy4lO1rxs7JdRAooFnVtgrM6Xcb8PCM9b_SUmszVbMKnA/viewform?embedded=true')">QoL INICO-FEAPS: Otros</a></li>            
+          </ul>
+        </div>
+
+        <!-- CHECKLIST -->
+        <div class="group">
+          <h3>Checklist</h3>
+          <ul class="list" id="checklist">
+            <li><button class="item-btn" data-title="Accesibilidad" data-url="URL_AQUI">Accesibilidad</button></li>
+            <li><button class="item-btn" data-title="Ambiental" data-url="URL_AQUI">Ambiental</button></li>
+            <li><a href="#" onclick="load('https://docs.google.com/forms/d/e/1FAIpQLSeWPzaZ4zf9bzT3rk11QpDJeiBjiXhkXH57McvPQOUaAeaEHg/viewform?embedded=true')">Checklist Accesibilidad</a></li>         
+            <li><a href="#" onclick="load('https://docs.google.com/forms/d/e/1FAIpQLSfZqMsVi8GzXp8bvhWIuJ7_l665RBCi1NB3bDWgShAAV9iTzg/viewform?embedded=true')">Checklist Ambiental</a></li>              
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Viewer -->
+      <section class="main">
+        <div class="viewer-head">
+          <h2 class="viewer-title" id="viewerTitle">Selecciona un elemento del menú</h2>
+          <button class="open" id="openNew" disabled>Abrir en pestaña nueva ↗</button>
+        </div>
+        <iframe id="viewer" title="Visor" loading="lazy" referrerpolicy="no-referrer"></iframe>
+      </section>
     </div>
-    <iframe id="visorForms"></iframe>
-  </section>
-  
-  <!-- Visualizaciones -->
-  <section id="viz">
-    <div class="sidebar">
-      <h3>Dashboards</h3>
-      <ul>
-        <li><a href="#" onclick="loadViz('https://lookerstudio.google.com/embed/reporting/TU_DASHBOARD')">Panel General</a></li>
-      </ul>
-    </div>
-    <iframe id="visorViz"></iframe>
-  </section>
-</main>
 
-<footer style="text-align:center; padding:1rem; border-top:1px solid #333;">
-  © <span id="year"></span> DiversoLAB |
-  <a href="https://drive.google.com/file/d/18exjFFYQGUNF6L_-oBcT_KMs27if8KOc/view?usp=sharing" target="_blank" style="color:#46d3c0;">Reglamento de Protección de Datos</a>
-</footer>
+    <p class="footer">© <span id="y"></span> DiversoLAB · <a id="reglamentoLink" href="#" target="_blank" rel="noopener">Ver Reglamento</a></p>
+  </div>
 
-https://drive.google.com/file/d/18exjFFYQGUNF6L_-oBcT_KMs27if8KOc/view?usp=sharing
-  
 <script>
-const y = new Date().getFullYear();
-document.getElementById('year').textContent = y;
+  // Año
+  document.getElementById('y').textContent = new Date().getFullYear();
 
-const btnForms = document.getElementById('btnForms');
-const btnViz = document.getElementById('btnViz');
-const forms = document.getElementById('forms');
-const viz = document.getElementById('viz');
+  // ENLACE AL REGLAMENTO (pon aquí tu URL pública – PDF, Drive, web)
+  const reglamentoURL = "https://drive.google.com/file/d/18exjFFYQGUNF6L_-oBcT_KMs27if8KOc/view?usp=sharing"; // <— REEMPLAZA ESTO
+  document.getElementById('reglamentoLink').href = reglamentoURL;
+  document.getElementById('btnReglamento').onclick = () => window.open(reglamentoURL, '_blank');
 
-btnForms.onclick = () => {
-  btnForms.classList.add('active'); btnViz.classList.remove('active');
-  forms.classList.add('active'); viz.classList.remove('active');
-};
-btnViz.onclick = () => {
-  btnViz.classList.add('active'); btnForms.classList.remove('active');
-  viz.classList.add('active'); forms.classList.remove('active');
-};
+  // Lógica del visor
+  const viewer = document.getElementById('viewer');
+  const viewerTitle = document.getElementById('viewerTitle');
+  const openNew = document.getElementById('openNew');
 
-function load(url){ document.getElementById('visorForms').src = url; }
-function loadViz(url){ document.getElementById('visorViz').src = url; }
+  function select(btn){
+    // Quitar activos
+    document.querySelectorAll('.item-btn.active').forEach(b=>b.classList.remove('active'));
+    // Activar
+    btn.classList.add('active');
+    const title = btn.dataset.title;
+    const url = btn.dataset.url;
+
+    viewerTitle.textContent = title;
+    viewer.src = url || '';
+    openNew.disabled = !url;
+    openNew.onclick = () => window.open(url, '_blank');
+    // Guardar última selección
+    localStorage.setItem('intralink_last', JSON.stringify({title, url}));
+  }
+
+  // Delegación de clics
+  document.addEventListener('click', (e)=>{
+    const btn = e.target.closest('.item-btn');
+    if(!btn) return;
+    select(btn);
+  });
+
+  // Restaurar si existe
+  const saved = localStorage.getItem('intralink_last');
+  if(saved){
+    try{
+      const {title} = JSON.parse(saved);
+      const match = Array.from(document.querySelectorAll('.item-btn'))
+        .find(b => b.dataset.title === title);
+      if(match) select(match);
+    }catch{}
+  }
 </script>
-
 </body>
 </html>

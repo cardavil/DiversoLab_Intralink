@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DiversoLAB – InTralink · Visualizaciones</title>
 <style>
   :root{
-    --bg-base:#ffffff;
-    --bg-a:#fdda64;
-    --bg-b:#cad2e9;
+    --bg-base:#ffffff; 
+    --bg-a:#fdda64; 
+    --bg-b:#cad2e9; 
     --text:#3f2b56;
-    --card:#ffffffee;
-    --line:#e3e6ef;
-    --btn:#fdda64;
-    --btn-text:#3f2b56;
+    --card:#ffffffee; 
+    --line:#e3e6ef; 
+    --btn:#fdda64; 
+    --btn-text:#3f2b56; 
     --btn-hover:#cad2e9;
     --radius:14px;
   }
   body{
-    margin:0; color:var(--text); font:16px/1.5 system-ui, -apple-system, Segoe UI, Roboto;
+    margin:0; color:var(--text); font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto;
     background: var(--bg-base);
     background-image: linear-gradient(180deg, var(--bg-a) 0%, var(--bg-b) 100%);
     background-attachment: fixed;
@@ -29,16 +29,16 @@
     background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
     padding:12px 16px;
   }
-  .brand{display:flex; align-items:center; gap:12px}
+  .brand{ display:flex; align-items:center; gap:12px }
   .brand img{ width:40px; height:40px; object-fit:contain; border-radius:8px }
   .brand h1{ font-size:18px; margin:0 }
-  .top-buttons{ display:flex; gap:10px; }
-  .top-buttons .open{
+  .top-buttons{ display:flex; gap:10px }
+  .open{
     background:var(--btn); color:var(--btn-text); border:none; border-radius:10px;
-    padding:8px 12px; cursor:pointer; transition:background .2s ease; text-decoration:none;
+    padding:8px 12px; cursor:pointer; transition:background .2s ease;
   }
-  .top-buttons .open:hover{ background:var(--btn-hover) }
-  .top-buttons .open.active{ outline:2px solid color-mix(in srgb, var(--btn) 60%, transparent) }
+  .open:hover{ background:var(--btn-hover) }
+  .open.active{ outline:2px solid color-mix(in srgb, var(--btn) 60%, transparent) }
   .layout{ display:flex; gap:16px; margin-top:16px; }
   .side{
     width:320px; min-width:260px; background:var(--card); border:1px solid var(--line);
@@ -83,14 +83,13 @@
   <div class="wrap">
     <header class="header">
       <div class="brand">
-        <img src="https://drive.google.com/uc?export=view&id=1HmOFegB4pdZa2Fh-NLBXWhQn38oIQrr1" alt="DiversoLAB logo">
+        <!-- usa el mismo logo que ya tenías -->
+        <img src="https://drive.google.com/file/d/1HmOFegB4pdZa2Fh-NLBXWhQn38oIQrr1/view?usp=sharing" alt="DiversoLAB logo">
         <h1>DiversoLAB – InTralink</h1>
       </div>
       <div class="top-buttons">
-        <!-- Enlace de vuelta a Formularios -->
-        <a class="open" href="./index.html">Formularios</a>
-        <!-- Esta es la página activa (Visualizaciones) -->
-        <a class="open active" href="./viz.html">Visualizaciones</a>
+        <button class="open" id="btnForms">Formularios</button>
+        <button class="open active" id="btnDash">Visualizaciones</button>
       </div>
     </header>
 
@@ -98,27 +97,26 @@
       <aside class="side">
         <div class="group">
           <h3>Dashboards</h3>
-          <ul class="list">
-            <!-- Usa enlaces EMBED de Looker Studio: https://lookerstudio.google.com/embed/reporting/ID... -->
-            <li><button class="item-btn" data-title="Panel General ODS" data-url="https://lookerstudio.google.com/embed/reporting/REEMPLAZA_ID">Panel General ODS</button></li>
-            <li><button class="item-btn" data-title="Calidad de Vida (baseline → post)" data-url="https://lookerstudio.google.com/embed/reporting/REEMPLAZA_ID">Calidad de Vida (baseline → post)</button></li>
-            <li><button class="item-btn" data-title="Accesibilidad & Ambiental" data-url="https://lookerstudio.google.com/embed/reporting/REEMPLAZA_ID">Accesibilidad & Ambiental</button></li>
-            <li><button class="item-btn" data-title="Satisfacción – Experiencias/Cursos" data-url="https://lookerstudio.google.com/embed/reporting/REEMPLAZA_ID">Satisfacción – Experiencias/Cursos</button></li>
+          <ul class="list" id="dashboards">
+            <!-- Pega aquí TUS enlaces EMBED de Looker Studio (no toco tus formularios) -->
+            <!-- Ejemplos de placeholders (puedes borrar): -->
+            <li><button class="item-btn" data-title="Panel General ODS" data-url="">Panel General ODS</button></li>
+            <li><button class="item-btn" data-title="Calidad de Vida (baseline → post)" data-url="">Calidad de Vida (baseline → post)</button></li>
+            <li><button class="item-btn" data-title="Accesibilidad & Ambiental" data-url="">Accesibilidad & Ambiental</button></li>
           </ul>
         </div>
 
         <!-- NOTAS:
-          - Para añadir un NUEVO dashboard: duplica una <li> y pega el enlace EMBED.
-          - Si quieres mostrar un PDF/Drive aquí también funciona (usa /preview).
+          - Usa enlaces EMBED: https://lookerstudio.google.com/embed/reporting/ID...
+          - También puedes pegar PDFs de Drive usando /preview en lugar de /view
+            (ej: https://drive.google.com/file/d/TU_ID/preview)
         -->
       </aside>
 
       <section class="main">
         <div class="viewer-head">
           <h2 class="viewer-title" id="viewerTitle">Selecciona un dashboard</h2>
-          <div style="display:flex; gap:8px;">
-            <button class="open-small" id="openNew" disabled>Abrir en pestaña nueva ↗</button>
-          </div>
+          <button class="open-small" id="openNew" disabled>Abrir en pestaña nueva ↗</button>
         </div>
         <iframe id="viewer" title="Visor Dashboards" loading="lazy" referrerpolicy="no-referrer"></iframe>
       </section>
@@ -130,6 +128,11 @@
 <script>
   document.getElementById('y').textContent = new Date().getFullYear();
 
+  // Navegación entre páginas
+  document.getElementById('btnForms').onclick = () => { window.location.href = 'index.html'; };
+  document.getElementById('btnDash').onclick  = () => { window.location.href = 'viz.html'; };
+
+  // Lógica del visor para dashboards
   const viewer = document.getElementById('viewer');
   const title  = document.getElementById('viewerTitle');
   const openNew = document.getElementById('openNew');

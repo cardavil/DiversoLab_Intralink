@@ -73,10 +73,51 @@
 
   .footer{ text-align:center; margin-top:16px; color:#5b4a6e; }
 
-  @media (max-width: 900px){
-    .layout{ flex-direction:column }
-    .side{ width:100%; height:auto }
+/* Ajustes para pantallas móviles */
+@media (max-width: 900px) {
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
   }
+
+  .layout {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .side {
+    width: 100%;
+    height: auto;
+    max-height: 50vh;
+    overflow-y: auto;
+    border: 1px solid var(--line);
+  }
+
+  .main {
+    min-height: 70vh;
+  }
+
+  iframe {
+    min-height: 65vh;
+    height: 70vh;
+  }
+
+  .viewer-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .open {
+    width: 100%;
+  }
+}
+
+
+  
 </style>
 </head>
 <body>

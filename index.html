@@ -96,7 +96,10 @@
         <img src="https://drive.google.com/file/d/1HmOFegB4pdZa2Fh-NLBXWhQn38oIQrr1/view?usp=sharing" alt="DiversoLAB logo">
         <h1>DiversoLAB – InTralink</h1>
       </div>
-      <button class="open" id="btnReglamento">Reglamento de Protección de Datos</button>
+      <div class="top-buttons">
+        <button class="open active" id="btnForms">Formularios</button>
+        <button class="open" id="btnDash">Visualizaciones</button>
+      </div>   
     </header>
 
     <div class="layout">
@@ -151,6 +154,26 @@
   // Año
   document.getElementById('y').textContent = new Date().getFullYear();
 
+  // LÓGICA DE CAMBIO ENTRE FORMULARIOS Y DASHBOARDS
+  const btnForms = document.getElementById('btnForms');
+  const btnDash = document.getElementById('btnDash');
+  const layoutForms = document.querySelector('.layout'); // tu layout actual (formularios)
+  const layoutDash = document.getElementById('layoutDash');
+
+  btnForms.onclick = () => {
+    btnForms.classList.add('active');
+    btnDash.classList.remove('active');
+    layoutForms.style.display = 'flex';
+    layoutDash.style.display = 'none';
+  };
+  
+  btnDash.onclick = () => {
+    btnDash.classList.add('active');
+    btnForms.classList.remove('active');
+    layoutForms.style.display = 'none';
+    layoutDash.style.display = 'flex';
+  };
+  
   // Lógica del visor
   const viewer = document.getElementById('viewer');
   const viewerTitle = document.getElementById('viewerTitle');

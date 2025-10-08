@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>DiversoLAB – InTralink</title>
+<style>
+body {font-family: sans-serif; background:#0f1320; color:white; margin:0;}
+header {background:#1d2438; padding:1rem; text-align:center;}
+nav {display:flex; justify-content:center; gap:1rem; margin-bottom:1rem;}
+button {background:#2d3550; color:white; border:none; padding:0.5rem 1rem; border-radius:8px; cursor:pointer;}
+button.active {background:#46d3c0; color:#000;}
+section {display:none;}
+section.active {display:flex;}
+.sidebar {width:200px; padding:1rem; border-right:1px solid #444;}
+iframe {flex:1; height:80vh; border:0;}
+main {display:flex;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>DiversoLAB – InTralink</h1>
+  <nav>
+    <button id="btnForms" class="active">Forms</button>
+    <button id="btnViz">Visualizaciones</button>
+  </nav>
+</header>
+
+<main>
+  <!-- Registros -->
+  <section id="forms" class="active">
+    <div class="sidebar">
+      <h3>Formularios</h3>
+      <ul>
+        <li><a href="#" onclick="load('https://docs.google.com/forms/d/e/1FAIpQLScghuGM34r0ugfefoma48AS3nqsSkVjqFMHqlyaJw91f0Q6AA/viewform?embedded=true')">Registro + Consentimiento</a></li>     
+      </ul>
+    </div>
+    <iframe id="visorForms"></iframe>
+  </section>
+
+  <!-- Checklists -->
+  <section id="forms" class="active">
+    <div class="sidebar">
+      <h3>Formularios</h3>
+      <ul>      
+        <li><a href="#" onclick="load('https://docs.google.com/forms/d/e/1FAIpQLSeWPzaZ4zf9bzT3rk11QpDJeiBjiXhkXH57McvPQOUaAeaEHg/viewform?embedded=true')">Checklist Accesibilidad</a></li>         
+        <li><a href="#" onclick="load('https://docs.google.com/forms/d/e/1FAIpQLSfZqMsVi8GzXp8bvhWIuJ7_l665RBCi1NB3bDWgShAAV9iTzg/viewform?embedded=true')">Checklist Ambiental</a></li>         
+      </ul>
+    </div>
+    <iframe id="visorForms"></iframe>
+  </section>
+
+  <!-- Forms -->
+  <section id="forms" class="active">
+    <div class="sidebar">
+      <h3>Formularios</h3>
+      <ul>
+        <li><a href="#" onclick="load('https://docs.google.com/forms/d/e/1FAIpQLScghuGM34r0ugfefoma48AS3nqsSkVjqFMHqlyaJw91f0Q6AA/viewform?embedded=true')">Registro + Consentimiento</a></li>     
+        <li><a href="#" onclick="load('https://docs.google.com/forms/d/e/1FAIpQLSdWCZgfYQHg5M6T9AeCP_pjDdevG9qIKgtj5UWRJlO56LhuDg/viewform?embedded=true')">Evaluación Experiencias</a></li>     
+        <li><a href="#" onclick="load('https://docs.google.com/forms/d/e/1FAIpQLSddsNTnnqedoSuIdl8HxN0FrI5S8y8JnL4vihNCngERJpEqMw/viewform?embedded=true')">Evaluación Cursos</a></li>        
+        <li><a href="#" onclick="load('https://docs.google.com/forms/d/e/1FAIpQLSex5W3Bz3YOnfuAGhPiLPiJjd2UW_v_xxdBLbjjxX1r4AcL2Q/viewform?embedded=true')">QoL INICO-FEAPS: Autoinforme</a></li>         
+        <li><a href="#" onclick="load('https://docs.google.com/forms/d/e/1FAIpQLSdEuJy4lO1rxs7JdRAooFnVtgrM6Xcb8PCM9b_SUmszVbMKnA/viewform?embedded=true')">QoL INICO-FEAPS: Otros</a></li>                
+      </ul>
+    </div>
+    <iframe id="visorForms"></iframe>
+  </section>
+  
+  <!-- Visualizaciones -->
+  <section id="viz">
+    <div class="sidebar">
+      <h3>Dashboards</h3>
+      <ul>
+        <li><a href="#" onclick="loadViz('https://lookerstudio.google.com/embed/reporting/TU_DASHBOARD')">Panel General</a></li>
+      </ul>
+    </div>
+    <iframe id="visorViz"></iframe>
+  </section>
+</main>
+
+<footer style="text-align:center; padding:1rem; border-top:1px solid #333;">
+  © <span id="year"></span> DiversoLAB |
+  <a href="https://drive.google.com/file/d/18exjFFYQGUNF6L_-oBcT_KMs27if8KOc/view?usp=sharing" target="_blank" style="color:#46d3c0;">Reglamento de Protección de Datos</a>
+</footer>
+
+https://drive.google.com/file/d/18exjFFYQGUNF6L_-oBcT_KMs27if8KOc/view?usp=sharing
+  
+<script>
+const y = new Date().getFullYear();
+document.getElementById('year').textContent = y;
+
+const btnForms = document.getElementById('btnForms');
+const btnViz = document.getElementById('btnViz');
+const forms = document.getElementById('forms');
+const viz = document.getElementById('viz');
+
+btnForms.onclick = () => {
+  btnForms.classList.add('active'); btnViz.classList.remove('active');
+  forms.classList.add('active'); viz.classList.remove('active');
+};
+btnViz.onclick = () => {
+  btnViz.classList.add('active'); btnForms.classList.remove('active');
+  viz.classList.add('active'); forms.classList.remove('active');
+};
+
+function load(url){ document.getElementById('visorForms').src = url; }
+function loadViz(url){ document.getElementById('visorViz').src = url; }
+</script>
+
+</body>
+</html>

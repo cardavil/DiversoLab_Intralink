@@ -156,23 +156,10 @@
 
   // LÓGICA DE CAMBIO ENTRE FORMULARIOS Y DASHBOARDS
   const btnForms = document.getElementById('btnForms');
-  const btnDash = document.getElementById('btnDash');
-  const layoutForms = document.querySelector('.layout'); // tu layout actual (formularios)
-  const layoutDash = document.getElementById('layoutDash');
+  const btnDash  = document.getElementById('btnDash');
 
-  btnForms.onclick = () => {
-    btnForms.classList.add('active');
-    btnDash.classList.remove('active');
-    layoutForms.style.display = 'flex';
-    layoutDash.style.display = 'none';
-  };
-  
-  btnDash.onclick = () => {
-    btnDash.classList.add('active');
-    btnForms.classList.remove('active');
-    layoutForms.style.display = 'none';
-    layoutDash.style.display = 'flex';
-  };
+  btnForms.onclick = () => { window.location.href = 'Formulario.html'; };
+  btnDash.onclick  = () => { window.location.href = 'Visualizaciones.html'; };
   
   // Lógica del visor
   const viewer = document.getElementById('viewer');

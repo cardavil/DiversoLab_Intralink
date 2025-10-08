@@ -92,7 +92,7 @@
     <!-- Encabezado con logo .gif -->
     <header class="header">
       <div class="brand">
-        <!-- REEMPLAZA URL_DEL_LOGO.gif por el enlace a tu logo -->
+        <!-- Mantengo tu logo tal cual -->
         <img src="https://drive.google.com/file/d/1HmOFegB4pdZa2Fh-NLBXWhQn38oIQrr1/view?usp=sharing" alt="DiversoLAB logo">
         <h1>DiversoLAB – InTralink</h1>
       </div>
@@ -109,7 +109,7 @@
         <div class="group">
           <h3>Registros</h3>
           <ul class="list" id="registros">
-            <!-- Reemplaza URL_AQUI con el enlace embed de Google Forms -->
+            <!-- Tus enlaces intactos -->
             <li><button class="item-btn" data-title="Registro" data-url="https://docs.google.com/forms/d/e/1FAIpQLScghuGM34r0ugfefoma48AS3nqsSkVjqFMHqlyaJw91f0Q6AA/viewform?usp=header">Registro</button></li>   
             <li><button class="item-btn" data-title="Consentimiento Uso Datos" data-url="https://drive.google.com/file/d/18exjFFYQGUNF6L_-oBcT_KMs27if8KOc/view?usp=sharing">Consentimiento Uso Datos</button></li>
           </ul>
@@ -154,27 +154,13 @@
   // Año
   document.getElementById('y').textContent = new Date().getFullYear();
 
-  // LÓGICA DE CAMBIO ENTRE FORMULARIOS Y DASHBOARDS
+  // ✅ Navegación entre páginas (sin tocar tu layout)
   const btnForms = document.getElementById('btnForms');
-  const btnDash = document.getElementById('btnDash');
-  const layoutForms = document.querySelector('.layout'); // tu layout actual (formularios)
-  const layoutDash = document.getElementById('layoutDash');
+  const btnDash  = document.getElementById('btnDash');
+  btnForms.onclick = () => { window.location.href = 'formularios.html'; };
+  btnDash.onclick  = () => { window.location.href = 'visualizaciones.html'; };
 
-  btnForms.onclick = () => {
-    btnForms.classList.add('active');
-    btnDash.classList.remove('active');
-    layoutForms.style.display = 'flex';
-    layoutDash.style.display = 'none';
-  };
-  
-  btnDash.onclick = () => {
-    btnDash.classList.add('active');
-    btnForms.classList.remove('active');
-    layoutForms.style.display = 'none';
-    layoutDash.style.display = 'flex';
-  };
-  
-  // Lógica del visor
+  // Lógica del visor (tuya, intacta)
   const viewer = document.getElementById('viewer');
   const viewerTitle = document.getElementById('viewerTitle');
   const openNew = document.getElementById('openNew');

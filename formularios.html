@@ -42,7 +42,7 @@
   .brand{display:flex; align-items:center; gap:12px}
   .brand img{ width:64px; height:64px; object-fit:contain; border-radius:8px }
 
-  /* ======= Título ======= */
+  /* ======= Título (acrónimo y expansión) ======= */
   .title{ display:flex; flex-direction:column; line-height:1.12 }
   .acronym{
     font-weight:800; font-size:22px; letter-spacing:.08em;
@@ -112,7 +112,7 @@
   .footer{ text-align:center; margin-top:16px; color:#5b4a6e; }
   .footer a{ color:inherit; text-decoration:underline }
 
-  /* --- Móvil: reacomoda header y layout --- */
+  /* --- Móvil: reacomoda header y layout (vertical por defecto) --- */
   @media (max-width:700px){
     .header{
       flex-direction: column;
@@ -168,16 +168,23 @@
     }
   }
 
-  /* ===== Móvil horizontal: igualar alturas sin romper vertical ===== */
-  @media (max-width:700px) and (min-aspect-ratio:1/1){
-    .main iframe{ min-height:70svh; }
-    .side{
+  /* ===== Móvil horizontal: dos columnas e igual altura ===== */
+  @media (max-width:900px) and (min-aspect-ratio:1/1){
+    .layout{
+      display:flex;
+      flex-direction:row;      /* lado a lado */
+      align-items:stretch;     /* misma altura real */
+      gap:16px;
+    }
+    .side, .main{
+      flex:1 1 0;
+      min-height:auto;
       height:auto;
-      min-height:calc(70svh + var(--viewerhead));
-      overflow:auto;
+    }
+    .main iframe{
+      min-height:70svh;        /* base visual del visor */
     }
   }
-
 </style>
 </head>
 
@@ -212,6 +219,7 @@
 
     <!-- ======= Contenido ======= -->
     <div class="layout" id="layoutForms">
+      <!-- Sidebar -->
       <aside class="side">
         <div class="group">
           <h3>Registros</h3>
@@ -255,11 +263,18 @@
   </div>
 
 <script>
+  // Año actual
   document.getElementById('y').textContent = new Date().getFullYear();
 
-  document.getElementById('btnForms').onclick = () => window.location.href = 'formularios.html';
-  document.getElementById('btnDash').onclick = () => window.location.href = 'visualizaciones.html';
+  // Navegación entre páginas
+  document.getElementById('btnForms').onclick = () => {
+    window.location.href = 'formularios.html';
+  };
+  document.getElementById('btnDash').onclick = () => {
+    window.location.href = 'visualizaciones.html';
+  };
 
+  // Lógica del visor
   const viewer = document.getElementById('viewer');
   const viewerTitle = document.getElementById('viewerTitle');
   const openNew = document.getElementById('openNew');
@@ -269,6 +284,7 @@
     btn.classList.add('active');
     const title = btn.dataset.title;
     const url = btn.dataset.url;
+
     viewerTitle.textContent = title;
     viewer.src = url || '';
     openNew.disabled = !url;
@@ -282,11 +298,13 @@
     select(btn);
   });
 
+  // Restaurar última selección
   const saved = localStorage.getItem('intralink_last');
   if(saved){
     try{
       const {title} = JSON.parse(saved);
-      const match = Array.from(document.querySelectorAll('.item-btn')).find(b => b.dataset.title === title);
+      const match = Array.from(document.querySelectorAll('.item-btn'))
+        .find(b => b.dataset.title === title);
       if(match) select(match);
     }catch{}
   }

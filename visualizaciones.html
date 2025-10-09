@@ -114,13 +114,55 @@
   .footer{ text-align:center; margin-top:16px; color:#5b4a6e; }
   .footer a{ color:inherit; text-decoration:underline }
 
-  /* ======= Responsive ======= */
-  @media (max-width:900px){
-    .layout{ flex-direction:column }
-    .side{ width:100%; height:auto; max-height:50vh; overflow:auto }
+  
+  /* --- Móvil: reacomoda header y layout --- */
+  @media (max-width:700px){
+    /* Header en columna */
+    .header{
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+   }
+
+   /* Logo y título */
+    .brand{
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      text-align: center;
+    }
+
+    /* Botonera debajo del header */
+    .top-buttons{
+      order: 2;
+      width: 100%;
+      display: flex;
+      gap: 8px;
+    }
+
+    /* Cada botón ocupa 50% */
+    .top-buttons .open{
+      flex: 1 1 auto;
+      width: auto;
+    }
+
+    /* Ajustes de texto */
     .acronym{ font-size:18px }
     .expansion{ font-size:11px }
+
+    /* Layout del cuerpo */
+    .layout{
+      flex-direction: column;
+    }
+
+    .side{
+      width:100%;
+      height:auto;
+      max-height:50vh;
+      overflow:auto;
+    }
   }
+
 </style>
 </head>
 

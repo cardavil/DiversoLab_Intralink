@@ -76,7 +76,7 @@
   /* ======= Layout general ======= */
   .layout{ display:flex; gap:16px; margin-top:16px; }
   .side{
-    width:320px; min-width:260px; background:var(--card); border:1px solid var(--line);
+    width:260px; min-width:220px; background:var(--card); border:1px solid var(--line);
     border-radius:var(--radius); padding:12px; height:calc(100vh - 180px); overflow:auto;
   }
   .main{
@@ -156,7 +156,13 @@
     .layout{
       flex-direction: column;
     }
-
+    
+    html, body { overflow-x: hidden; }
+    .main, .side{
+      width:100%;
+      max-width:100%;
+    }
+    
     .side{
       width:100%;
       height:auto;

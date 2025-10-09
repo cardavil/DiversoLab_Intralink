@@ -161,12 +161,12 @@
   /* ===== Escritorio: igualar alturas de sidebar y visor ===== */
   @media (min-width:901px){
     .side{
-      height:auto;
-      min-height:78vh;
+      height:auto;        /* anula el fijo */
+      min-height:78vh;    /* mismo piso que el visor *
       overflow:auto;
     }
     .main iframe{
-      min-height:78vh;
+       min-height:78vh;    /* igual piso que el sidebar */
     }
   }
 
@@ -178,15 +178,34 @@
       align-items:stretch;     /* misma altura real */
       gap:16px;
     }
-    .side, .main{
-      flex:1 1 0;
-      min-height:auto;
+
+    /* Sidebar: NO heredar anchos de escritorio y limitar a 38% */
+    .side{
+      width:auto;              /* ← anula width:260px */
+      min-width:0;             /* ← anula min-width:220px */
+      flex:0 0 38%;            /* ← ocupa ~38% */
+      max-width:38%;
+      box-sizing:border-box;
       height:auto;
+      min-height:auto;
+      overflow:auto;
     }
+
+    /* Visor: toma el resto (~62%) */
+    .main{
+      min-width:0;
+      flex:1 1 62%;
+      max-width:62%;
+      height:auto;
+      min-height:auto;
+    }
+
+    /* Base de alto para el iframe del visor */
     .main iframe{
-      min-height:70svh;        /* base visual del visor */
+      min-height:70svh;
     }
   }
+  
 </style>
 </head>
 

@@ -18,6 +18,7 @@
     --btn-text:#3f2b56;
     --btn-hover:#cad2e9;
     --radius:14px;
+    --viewerhead:44px; /* alto aprox. del encabezado del visor */
   }
 
   /* ======= Fondo y tipografía ======= */
@@ -41,7 +42,7 @@
   .brand{display:flex; align-items:center; gap:12px}
   .brand img{ width:64px; height:64px; object-fit:contain; border-radius:8px }
 
-  /* ======= Título (acró nimo y expansión) ======= */
+  /* ======= Título (acrónimo y expansión) ======= */
   .title{ display:flex; flex-direction:column; line-height:1.12 }
   .acronym{
     font-weight:800; font-size:22px; letter-spacing:.08em;
@@ -114,7 +115,6 @@
   .footer{ text-align:center; margin-top:16px; color:#5b4a6e; }
   .footer a{ color:inherit; text-decoration:underline }
 
-  
   /* --- Móvil: reacomoda header y layout --- */
   @media (max-width:700px){
     /* Header en columna */
@@ -122,9 +122,9 @@
       flex-direction: column;
       align-items: stretch;
       gap: 8px;
-   }
+    }
 
-   /* Logo y título */
+    /* Logo y título */
     .brand{
       display: flex;
       flex-direction: row;
@@ -154,16 +154,39 @@
     .expansion{ font-size:11px }
 
     /* Layout del cuerpo */
-    .layout{
-      flex-direction: column;
-    }
+    .layout{ flex-direction: column; }
 
+    /* Sidebar en móvil: ancho completo */
     .side{
       width:100%;
       box-sizing:border-box;
+      height:auto;
+      min-height:auto;
+      overflow:auto;
     }
   }
 
+  /* ===== Escritorio: igualar alturas de sidebar y visor ===== */
+  @media (min-width:901px){
+    .side{
+      height:auto;        /* anula el fijo */
+      min-height:78vh;    /* mismo piso que el visor */
+      overflow:auto;
+    }
+    .main iframe{
+      min-height:78vh;    /* igual piso que el sidebar */
+    }
+  }
+
+  /* ===== Móvil horizontal: igualar alturas sin romper vertical ===== */
+  @media (max-width:700px) and (min-aspect-ratio:1/1){
+    .main iframe{ min-height:70svh; } /* alto del visor real en móvil */
+    .side{
+      height:auto;                               /* anula alto de escritorio */
+      min-height:calc(70svh + var(--viewerhead));/* igual al visor completo */
+      overflow:auto;
+    }
+  }
 </style>
 </head>
 
@@ -209,33 +232,38 @@
         </div>
 
         <div class="group">
-          <h3>Externos</h3>
+          <h3>Calidad de Vida (QoL FEAPS)</h3>
           <ul class="list">
-            <li><button class="item-btn" data-title="QoL INICO-FEAPS: Autoinforme" data-url="https://lookerstudio.google.com/embed/reporting/TU_ID_ACC/page/TU_PAGINA">QoL INICO-FEAPS: Autoinforme</button></li>
-            <li><button class="item-btn" data-title="QoL INICO-FEAPS: Otros" data-url="https://lookerstudio.google.com/embed/reporting/TU_ID_ACC/page/TU_PAGINA">QoL INICO-FEAPS: Otros</button></li>
-            <li><button class="item-btn" data-title="Evaluación de Experiencias" data-url="https://lookerstudio.google.com/embed/reporting/TU_ID_ACC/page/TU_PAGINA">Evaluación de Experiencias</button></li>
-            <li><button class="item-btn" data-title="Evaluación de Cursos" data-url="https://lookerstudio.google.com/embed/reporting/TU_ID_ACC/page/TU_PAGINA">Evaluación de Cursos</button></li>
-            <li><button class="item-btn" data-title="Evaluación de Proveedores" data-url="https://lookerstudio.google.com/embed/reporting/TU_ID_ACC/page/TU_PAGINA">Evaluación de Proveedores</button></li>
+            <li><button class="item-btn" data-title="QoL INICO-FEAPS: Autoinforme" data-url="https://lookerstudio.google.com/embed/reporting/TU_ID_QOL_AUTO/page/TU_PAGINA">QoL INICO-FEAPS: Autoinforme</button></li>
+            <li><button class="item-btn" data-title="QoL INICO-FEAPS: Otros" data-url="https://lookerstudio.google.com/embed/reporting/TU_ID_QOL_OTROS/page/TU_PAGINA">QoL INICO-FEAPS: Otros</button></li>
           </ul>
         </div>
 
         <div class="group">
-          <h3>Internos</h3>
+          <h3>Programas y aliados</h3>
           <ul class="list">
-            <li><button class="item-btn" data-title="Accesibilidad" data-url="https://lookerstudio.google.com/embed/reporting/TU_ID_ACC/page/TU_PAGINA">Accesibilidad</button></li>
-            <li><button class="item-btn" data-title="Ambiental" data-url="https://lookerstudio.google.com/embed/reporting/TU_ID_ACC/page/TU_PAGINA">Ambiental</button></li>
-            <li><button class="item-btn" data-title="Financiero" data-url="https://lookerstudio.google.com/embed/reporting/TU_ID_ACC/page/TU_PAGINA">Financiero</button></li>
+            <li><button class="item-btn" data-title="Evaluación de Experiencias" data-url="https://lookerstudio.google.com/embed/reporting/TU_ID_EXP/page/TU_PAGINA">Evaluación de Experiencias</button></li>
+            <li><button class="item-btn" data-title="Evaluación de Cursos" data-url="https://lookerstudio.google.com/embed/reporting/TU_ID_CURSOS/page/TU_PAGINA">Evaluación de Cursos</button></li>
+            <li><button class="item-btn" data-title="Evaluación de Proveedores" data-url="https://lookerstudio.google.com/embed/reporting/TU_ID_PROV/page/TU_PAGINA">Evaluación de Proveedores</button></li>
+          </ul>
+        </div>
+
+        <div class="group">
+          <h3>Accesibilidad y ambiente</h3>
+          <ul class="list">
+            <li><button class="item-btn" data-title="Checklist de Accesibilidad" data-url="https://lookerstudio.google.com/embed/reporting/TU_ID_ACC/page/TU_PAGINA">Checklist de Accesibilidad</button></li>
+            <li><button class="item-btn" data-title="Checklist Ambiental" data-url="https://lookerstudio.google.com/embed/reporting/TU_ID_AMB/page/TU_PAGINA">Checklist Ambiental</button></li>
           </ul>
         </div>
       </aside>
 
-      <!-- Viewer -->
+      <!-- Visor -->
       <section class="main">
         <div class="viewer-head">
           <h2 class="viewer-title" id="viewerTitle">Selecciona un dashboard</h2>
           <button class="open" id="openNew" disabled>Abrir en pestaña nueva ↗</button>
         </div>
-        <!-- Importante: allowfullscreen para Power BI/Looker -->
+        <!-- Importante: allowfullscreen para Looker -->
         <iframe id="viewer" title="Visor de dashboards" loading="lazy" referrerpolicy="no-referrer" allowfullscreen></iframe>
       </section>
     </div>

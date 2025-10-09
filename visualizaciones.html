@@ -4,38 +4,76 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>C.O.N.E.C.T.A – Visualizaciones</title>
+
 <style>
+  /* ======= Paleta y tokens base ======= */
   :root{
-    --bg-base:#ffffff;          /* base blanco */
-    --bg-a:#fdda64;             /* pasa a #fdda64 */
-    --bg-b:#cad2e9;             /* y luego a #cad2e9 */
-    --text:#3f2b56;             /* color de letra solicitado */
+    --bg-base:#ffffff;
+    --bg-a:#fdda64;
+    --bg-b:#cad2e9;
+    --text:#3f2b56;
     --card:#ffffffee;
     --line:#e3e6ef;
-    --btn:#fdda64;              /* color botón */
+    --btn:#fdda64;
     --btn-text:#3f2b56;
-    --btn-hover:#cad2e9;        /* hover botón */
+    --btn-hover:#cad2e9;
     --radius:14px;
   }
 
+  /* ======= Fondo y tipografía ======= */
   body{
-    margin:0; color:var(--text); font:16px/1.5 system-ui, -apple-system, Segoe UI, Roboto;
+    margin:0; color:var(--text);
+    font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto;
     background: var(--bg-base);
     background-image: linear-gradient(180deg, var(--bg-a) 0%, var(--bg-b) 100%);
     background-attachment: fixed;
   }
 
+  /* ======= Contenedor ======= */
   .wrap{ max-width:1200px; margin:24px auto; padding:0 16px; }
 
+  /* ======= Header ======= */
   .header{
     display:flex; align-items:center; justify-content:space-between; gap:16px;
     background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
     padding:12px 16px;
   }
   .brand{display:flex; align-items:center; gap:12px}
-  .brand img{ width:70px; height:auto; max-height:80px; object-fit:contain; border-radius:10px }
-  .brand h1{ font-size:18px; margin:0 }
+  .brand img{ width:64px; height:64px; object-fit:contain; border-radius:8px }
 
+  /* ======= Título (acró nimo y expansión) ======= */
+  .title{ display:flex; flex-direction:column; line-height:1.12 }
+  .acronym{
+    font-weight:800; font-size:22px; letter-spacing:.08em;
+    display:flex; align-items:center; gap:.25em;
+    text-transform:uppercase;
+  }
+  .acronym .l{ display:inline-block }
+  .acronym .dot{ opacity:.55 }
+
+  /* Colores de las letras (C O N E C T A) */
+  .acronym span:nth-child(1){ color:#fdda64; } /* C */
+  .acronym span:nth-child(3){ color:#a2ddd2; } /* O */
+  .acronym span:nth-child(5){ color:#cad2e9; } /* N */
+  .acronym span:nth-child(7){ color:#ff8e6f; } /* E */
+  .acronym span:nth-child(9){ color:#3f2b56; } /* C */
+  .acronym span:nth-child(11){ color:#fdda64; } /* T */
+  .acronym span:nth-child(13){ color:#a2ddd2; } /* A */
+
+  .expansion{
+    font-size:12px; opacity:.95; margin-top:2px;
+    text-transform:none; letter-spacing:.02em;
+  }
+
+  .top-buttons{ display:flex; gap:8px }
+  .open{
+    background:var(--btn); color:var(--btn-text); border:none; border-radius:10px;
+    padding:8px 12px; cursor:pointer;
+  }
+  .open:hover{ background:var(--btn-hover) }
+  .open.active{ outline:2px solid color-mix(in srgb, var(--btn) 45%, transparent) }
+
+  /* ======= Layout general ======= */
   .layout{ display:flex; gap:16px; margin-top:16px; }
   .side{
     width:320px; min-width:260px; background:var(--card); border:1px solid var(--line);
@@ -46,6 +84,7 @@
     border-radius:var(--radius); display:flex; flex-direction:column;
   }
 
+  /* ======= Secciones del menú ======= */
   .group{ margin-bottom:16px; }
   .group h3{
     margin:8px 8px 6px; font-size:14px; letter-spacing:.2px; opacity:.9;
@@ -59,106 +98,107 @@
   .item-btn:hover{ border-color:#d1d6ea; background:#fafbff }
   .item-btn.active{ outline:2px solid color-mix(in srgb, var(--btn) 50%, transparent) }
 
+  /* ======= Viewer ======= */
   .viewer-head{
     display:flex; align-items:center; justify-content:space-between; gap:8px;
     padding:10px 12px; border-bottom:1px solid var(--line);
   }
   .viewer-title{ margin:0; font-size:15px; }
-  .open{
-    background:var(--btn); color:var(--btn-text); border:none; border-radius:10px;
-    padding:8px 12px; cursor:pointer;
+  iframe{
+    flex:1; width:100%; border:0;
+    border-bottom-left-radius:var(--radius); border-bottom-right-radius:var(--radius);
+    min-height:70vh;
   }
-  .open:hover{ background:var(--btn-hover) }
-  iframe{ flex:1; width:100%; border:0; border-bottom-left-radius:var(--radius); border-bottom-right-radius:var(--radius) }
 
+  /* ======= Footer ======= */
   .footer{ text-align:center; margin-top:16px; color:#5b4a6e; }
+  .footer a{ color:inherit; text-decoration:underline }
 
-/* Ajustes para pantallas móviles */
-@media (max-width: 900px) {
-
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
+  /* ======= Responsive ======= */
+  @media (max-width:900px){
+    .layout{ flex-direction:column }
+    .side{ width:100%; height:auto; max-height:50vh; overflow:auto }
+    .acronym{ font-size:18px }
+    .expansion{ font-size:11px }
   }
-
-  .layout {
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .side {
-    width: 100%;
-    height: auto;
-    max-height: 50vh;
-    overflow-y: auto;
-    border: 1px solid var(--line);
-  }
-
-  .main {
-    min-height: 70vh;
-  }
-
-  iframe {
-    min-height: 65vh;
-    height: 70vh;
-  }
-
-  .viewer-head {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-  }
-
-  .open {
-    width: 100%;
-  }
-}
-
-
-  
 </style>
 </head>
+
 <body>
   <div class="wrap">
+    <!-- ======= Encabezado ======= -->
     <header class="header">
       <div class="brand">
-        <!-- mismo logo que ya usas -->
         <img src="./DiversoLab_Logo.gif" alt="DiversoLAB logo" decoding="async">
-        <h1>C.O.N.E.C.T.A – Centro de ObservacióN, Evaluación y Coordinación para la Transformación Accesible</h1>
+
+        <div class="title">
+          <div class="acronym">
+            <span class="l">C</span><span class="dot">·</span>
+            <span class="l">O</span><span class="dot">·</span>
+            <span class="l">N</span><span class="dot">·</span>
+            <span class="l">E</span><span class="dot">·</span>
+            <span class="l">C</span><span class="dot">·</span>
+            <span class="l">T</span><span class="dot">·</span>
+            <span class="l">A</span>
+          </div>
+          <div class="expansion">
+            centro de observación, evaluación y coordinación para la transformación accesible
+          </div>
+        </div>
       </div>
+
       <div class="top-buttons">
         <button class="open" id="btnForms">Formularios</button>
         <button class="open active" id="btnDash">Visualizaciones</button>
-      </div>   
+      </div>
     </header>
 
-    <div class="layout">
+    <!-- ======= Contenido ======= -->
+    <div class="layout" id="layoutDash">
+      <!-- Sidebar -->
       <aside class="side">
         <div class="group">
-          <h3>Dashboards</h3>
-          <ul class="list" id="dashboards">
-            <!-- 🔹 Pega aquí tus ENLACES EMBED de Looker Studio (no afecta a formularios) -->
-            <!-- Ejemplos (puedes borrar): -->
-            <li><button class="item-btn" data-title="Panel General ODS" data-url="">Panel General ODS</button></li>
-            <li><button class="item-btn" data-title="Calidad de Vida (baseline → post)" data-url="">Calidad de Vida (baseline → post)</button></li>
-            <li><button class="item-btn" data-title="Accesibilidad & Ambiental" data-url="">Accesibilidad & Ambiental</button></li>
+          <h3>Paneles generales</h3>
+          <ul class="list">
+            <!-- Reemplaza con tu enlace real de Looker (/embed) o Power BI (Publicar en web) -->
+            <li><button class="item-btn" data-title="Impacto general DiversoLAB" data-url="https://lookerstudio.google.com/embed/reporting/TU_ID_DE_REPORTE/page/TU_PAGINA">Impacto general DiversoLAB</button></li>
           </ul>
         </div>
 
-        <!-- NOTAS:
-          - Looker Studio embed: https://lookerstudio.google.com/embed/reporting/ID...
-          - PDF de Drive en visor: usa /preview (no /view)
-        -->
+        <div class="group">
+          <h3>Calidad de vida (QoL FEAPS)</h3>
+          <ul class="list">
+            <li><button class="item-btn" data-title="QoL – Autoinforme" data-url="https://lookerstudio.google.com/embed/reporting/TU_ID_QOL_AUTO/page/TU_PAGINA">QoL – Autoinforme</button></li>
+            <li><button class="item-btn" data-title="QoL – Evaluación de Otros" data-url="https://lookerstudio.google.com/embed/reporting/TU_ID_QOL_OTROS/page/TU_PAGINA">QoL – Evaluación de Otros</button></li>
+          </ul>
+        </div>
+
+        <div class="group">
+          <h3>Programas y aliados</h3>
+          <ul class="list">
+            <li><button class="item-btn" data-title="Evaluación de Experiencias" data-url="https://app.powerbi.com/view?r=TU_ID_PBIX_1">Evaluación de Experiencias</button></li>
+            <li><button class="item-btn" data-title="Evaluación de Cursos" data-url="https://app.powerbi.com/view?r=TU_ID_PBIX_2">Evaluación de Cursos</button></li>
+            <li><button class="item-btn" data-title="Evaluación de Proveedores" data-url="https://lookerstudio.google.com/embed/reporting/TU_ID_PROV/page/TU_PAGINA">Evaluación de Proveedores</button></li>
+          </ul>
+        </div>
+
+        <div class="group">
+          <h3>Accesibilidad y ambiente</h3>
+          <ul class="list">
+            <li><button class="item-btn" data-title="Checklist de Accesibilidad" data-url="https://lookerstudio.google.com/embed/reporting/TU_ID_ACC/page/TU_PAGINA">Checklist de Accesibilidad</button></li>
+            <li><button class="item-btn" data-title="Checklist Ambiental" data-url="https://app.powerbi.com/view?r=TU_ID_PBIX_3">Checklist Ambiental</button></li>
+          </ul>
+        </div>
       </aside>
 
+      <!-- Viewer -->
       <section class="main">
         <div class="viewer-head">
           <h2 class="viewer-title" id="viewerTitle">Selecciona un dashboard</h2>
           <button class="open" id="openNew" disabled>Abrir en pestaña nueva ↗</button>
         </div>
-        <iframe id="viewer" title="Visor" loading="lazy" referrerpolicy="no-referrer"></iframe>
+        <!-- Importante: allowfullscreen para Power BI/Looker -->
+        <iframe id="viewer" title="Visor de dashboards" loading="lazy" referrerpolicy="no-referrer" allowfullscreen></iframe>
       </section>
     </div>
 
@@ -166,32 +206,53 @@
   </div>
 
 <script>
-  // Año
+  // Año actual
   document.getElementById('y').textContent = new Date().getFullYear();
 
   // Navegación entre páginas
-  const btnForms = document.getElementById('btnForms');
-  const btnDash  = document.getElementById('btnDash');
-  btnForms.onclick = () => { window.location.href = 'formularios.html'; };
-  btnDash.onclick  = () => { window.location.href = 'visualizaciones.html'; };
+  document.getElementById('btnForms').onclick = () => {
+    window.location.href = 'formularios.html';
+  };
+  document.getElementById('btnDash').onclick = () => {
+    window.location.href = 'visualizaciones.html';
+  };
 
-  // Lógica del visor para dashboards
+  // Lógica del visor
   const viewer = document.getElementById('viewer');
-  const title  = document.getElementById('viewerTitle');
+  const viewerTitle = document.getElementById('viewerTitle');
   const openNew = document.getElementById('openNew');
+
+  function select(btn){
+    document.querySelectorAll('.item-btn.active').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const title = btn.dataset.title;
+    const url = btn.dataset.url;
+
+    viewerTitle.textContent = title;
+    viewer.src = url || '';
+    openNew.disabled = !url;
+    openNew.onclick = () => window.open(url, '_blank');
+
+    // Guardar última selección (clave distinta para visualizaciones)
+    localStorage.setItem('conecta_last_viz', JSON.stringify({title, url}));
+  }
 
   document.addEventListener('click', (e)=>{
     const btn = e.target.closest('.item-btn');
     if(!btn) return;
-    document.querySelectorAll('.item-btn.active').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-
-    const url = btn.dataset.url || '';
-    title.textContent = btn.dataset.title || 'Dashboard';
-    viewer.src = url;
-    openNew.disabled = !url;
-    openNew.onclick = () => url && window.open(url, '_blank');
+    select(btn);
   });
+
+  // Restaurar última selección de dashboards
+  const saved = localStorage.getItem('conecta_last_viz');
+  if(saved){
+    try{
+      const {title} = JSON.parse(saved);
+      const match = Array.from(document.querySelectorAll('.item-btn'))
+        .find(b => b.dataset.title === title);
+      if(match) select(match);
+    }catch{}
+  }
 </script>
 </body>
 </html>

@@ -46,8 +46,7 @@
   .title{ display:flex; flex-direction:column; line-height:1.12 }
   .acronym{
     font-weight:800; font-size:22px; letter-spacing:.08em;
-    display:flex; align-items:center; gap:.25em;
-    text-transform:uppercase;
+    display:flex; align-items:center; gap:.25em; text-transform:uppercase;
   }
   .acronym .l{ display:inline-block }
   .acronym .dot{ opacity:.55 }
@@ -115,16 +114,14 @@
   .footer{ text-align:center; margin-top:16px; color:#5b4a6e; }
   .footer a{ color:inherit; text-decoration:underline }
 
-  /* --- Móvil: reacomoda header y layout --- */
+  /* --- Móvil: reacomoda header y layout (vertical por defecto) --- */
   @media (max-width:700px){
-    /* Header en columna */
     .header{
       flex-direction: column;
       align-items: stretch;
       gap: 8px;
     }
 
-    /* Logo y título */
     .brand{
       display: flex;
       flex-direction: row;
@@ -135,25 +132,20 @@
       text-align: left;
     }
 
-    /* Botonera debajo del header */
     .top-buttons{
       order: 2;
       width: 100%;
       display: flex;
       gap: 8px;
     }
-
-    /* Cada botón ocupa 50% */
     .top-buttons .open{
       flex: 1 1 auto;
       width: auto;
     }
 
-    /* Ajustes de texto */
     .acronym{ font-size:18px }
     .expansion{ font-size:11px }
 
-    /* Layout del cuerpo */
     .layout{ flex-direction: column; }
 
     /* Sidebar en móvil: ancho completo */
@@ -169,22 +161,30 @@
   /* ===== Escritorio: igualar alturas de sidebar y visor ===== */
   @media (min-width:901px){
     .side{
-      height:auto;        /* anula el fijo */
-      min-height:78vh;    /* mismo piso que el visor */
+      height:auto;
+      min-height:78vh;
       overflow:auto;
     }
     .main iframe{
-      min-height:78vh;    /* igual piso que el sidebar */
+      min-height:78vh;
     }
   }
 
-  /* ===== Móvil horizontal: igualar alturas sin romper vertical ===== */
-  @media (max-width:700px) and (min-aspect-ratio:1/1){
-    .main iframe{ min-height:70svh; } /* alto del visor real en móvil */
-    .side{
-      height:auto;                               /* anula alto de escritorio */
-      min-height:calc(70svh + var(--viewerhead));/* igual al visor completo */
-      overflow:auto;
+  /* ===== Móvil horizontal: dos columnas e igual altura ===== */
+  @media (max-width:900px) and (min-aspect-ratio:1/1){
+    .layout{
+      display:flex;
+      flex-direction:row;      /* lado a lado */
+      align-items:stretch;     /* misma altura real */
+      gap:16px;
+    }
+    .side, .main{
+      flex:1 1 0;
+      min-height:auto;
+      height:auto;
+    }
+    .main iframe{
+      min-height:70svh;        /* base visual del visor */
     }
   }
 </style>
@@ -196,7 +196,6 @@
     <header class="header">
       <div class="brand">
         <img src="./DiversoLab_Logo.gif" alt="DiversoLAB logo" decoding="async">
-
         <div class="title">
           <div class="acronym">
             <span class="l">C</span><span class="dot">·</span>
@@ -226,7 +225,6 @@
         <div class="group">
           <h3>Paneles generales</h3>
           <ul class="list">
-            <!-- Reemplaza con tu enlace real de Looker (/embed) -->
             <li><button class="item-btn" data-title="Impacto general DiversoLAB" data-url="https://lookerstudio.google.com/embed/reporting/TU_ID_DE_REPORTE/page/TU_PAGINA">Impacto general DiversoLAB</button></li>
           </ul>
         </div>
@@ -263,7 +261,6 @@
           <h2 class="viewer-title" id="viewerTitle">Selecciona un dashboard</h2>
           <button class="open" id="openNew" disabled>Abrir en pestaña nueva ↗</button>
         </div>
-        <!-- Importante: allowfullscreen para Looker -->
         <iframe id="viewer" title="Visor de dashboards" loading="lazy" referrerpolicy="no-referrer" allowfullscreen></iframe>
       </section>
     </div>
@@ -276,12 +273,8 @@
   document.getElementById('y').textContent = new Date().getFullYear();
 
   // Navegación entre páginas
-  document.getElementById('btnForms').onclick = () => {
-    window.location.href = 'formularios.html';
-  };
-  document.getElementById('btnDash').onclick = () => {
-    window.location.href = 'visualizaciones.html';
-  };
+  document.getElementById('btnForms').onclick = () => window.location.href = 'formularios.html';
+  document.getElementById('btnDash').onclick = () => window.location.href = 'visualizaciones.html';
 
   // Lógica del visor
   const viewer = document.getElementById('viewer');
@@ -299,7 +292,6 @@
     openNew.disabled = !url;
     openNew.onclick = () => window.open(url, '_blank');
 
-    // Guardar última selección (clave distinta para visualizaciones)
     localStorage.setItem('conecta_last_viz', JSON.stringify({title, url}));
   }
 
@@ -309,13 +301,12 @@
     select(btn);
   });
 
-  // Restaurar última selección de dashboards
+  // Restaurar última selección
   const saved = localStorage.getItem('conecta_last_viz');
   if(saved){
     try{
       const {title} = JSON.parse(saved);
-      const match = Array.from(document.querySelectorAll('.item-btn'))
-        .find(b => b.dataset.title === title);
+      const match = Array.from(document.querySelectorAll('.item-btn')).find(b => b.dataset.title === title);
       if(match) select(match);
     }catch{}
   }
